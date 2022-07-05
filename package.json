@@ -1,0 +1,28 @@
+{
+  "name": "foodyou",
+  "version": "1.0.0",
+  "description": "Hello World! Welcome to one of my first big projects that im actually developing at school! This is a ``react-native`` app integrated with an image detector made with `teachable machine` to help people recognize if an edible prodcuct is compatible with your diet\r ---\r ## Features\r - Product recongition \r - Recommendation on similar products that match with your diet\r - Pre-loaded diets ex. vegan, celiac, etc..",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanGarber/FoodYou.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanGarber/FoodYou/issues"
+  },
+  "homepage": "https://github.com/AlanGarber/FoodYou#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mssql": "^8.1.2",
+    "nodemon": "^2.0.18"
+  }
+}
