@@ -3,6 +3,7 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const productTable=process.env.DB_TABLA_PRODUCTO;
+const productDisTable=process.env.DB_TABLA_PODUCTOXDESORDEN;
 
 export class ProductService{
 
@@ -63,6 +64,32 @@ export class ProductService{
         const response = await pool.request()
             .input('idProduct',sql.Int, id)
             .query(`DELETE FROM ${productTable} WHERE idProduct=@idProduct`);
+        console.log(response)
+
+        return response.recordset;
+    }
+
+    addDisorderByIdProduct = async (idProduct,idDisorder)=>{
+        console.log('This is a function on the service');
+        
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('idProduct',sql.Int, idProduct)
+            .input('idDisorder',sql.Int, idDisorder)
+            .query(`INSERT INTO ${productDisTable}
+                    (idProduct,idDisorder)
+                    VALUES
+                    (@idProduct,@idDisorder)`)
+    }
+
+    deleteDisorderByIdProduct = async (idProduct,idDisorder) => {
+        console.log('This is a function on the service');
+        console.log(idProduct,idDisorder)
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('idProduct',sql.Int, idProduct)
+            .input('idDisorder',sql.Int, idDisorder)
+            .query(`DELETE FROM ${productDisTable} WHERE idProduct=@idProduct AND idDisorder=@idDisorder`);
         console.log(response)
 
         return response.recordset;

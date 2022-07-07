@@ -3,6 +3,7 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const userTable=process.env.DB_TABLA_USUARIO;
+const userDisTable=process.env.DB_TABLA_USUARIOXDESORDEN
 
 export class UserService{
     
@@ -70,6 +71,45 @@ export class UserService{
         const response = await pool.request()
             .input('idUser',sql.Int, id)
             .query(`DELETE FROM ${userTable} WHERE idUser=@idUser`);
+        console.log(response)
+
+        return response.recordset;
+    }
+
+    addDisorderByIdUser = async (idUser,idDisorder)=>{
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('idUser',sql.Int, idUser)
+            .input('idDisorder',sql.Int, idDisorder)
+            .query(`INSERT INTO ${userDisTable}
+                    (idUser,idDisorder)
+                    VALUES
+                    (@idUser,@idDisorder)`)
+    }
+
+    getDisorderByIdUser = async (idUser)=>{
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('idUser',sql.Int, idUser)
+            .query(`SELECT idDisorder
+                    FROM ${userDisTable}
+                    WHERE idUser=@idUser`)
+
+        return response.recordset;
+    }
+
+    deleteDisorderByIdUser = async (idUser,idDisorder) => {
+        console.log('This is a function on the service');
+        console.log(idUser,idDisorder)
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('idUser',sql.Int, idUser)
+            .input('idDisorder',sql.Int, idDisorder)
+            .query(`DELETE FROM ${userDisTable} WHERE idUser=@idUser AND idDisorder=@idDisorder`);
         console.log(response)
 
         return response.recordset;

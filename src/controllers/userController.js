@@ -1,3 +1,4 @@
+import { query } from 'express';
 import { Router } from 'express';
 import { UserService } from '../services/userService.js';
 
@@ -16,6 +17,23 @@ router.get('/:id', async (req, res) => {
     console.log(`This is a get operation`);
   
     const user = await userService.getUserById(req.params.id);
+  
+    return res.status(200).json(user);
+});
+
+router.get('/disorders/:id', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a get operation`);
+  
+    const disorders = await userService.getDisorderByIdUser(req.params.id);
+  
+    return res.status(200).json(disorders);
+});
+
+router.post('/:id', async (req, res) => {
+    console.log(`This is a get operation`);
+  
+    const user = await userService.addDisorderByIdUser(req.params.id,req.query.idDisorder);
   
     return res.status(200).json(user);
 });
@@ -42,6 +60,14 @@ router.delete('/:id', async (req, res) => {
     console.log(`This is a delete operation`);
   
     const user = await userService.deleteUserById(req.params.id);
+  
+    return res.status(200).json(user);
+});
+
+router.delete('/:idUser/:idDisorder', async (req, res) => {
+    console.log(`This is a delete operation`);
+    console.log(req.params.idUser,req.query.idDisorder)
+    const user = await userService.deleteDisorderByIdUser(req.params.idUser,req.params.idDisorder);
   
     return res.status(200).json(user);
 });
