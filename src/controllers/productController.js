@@ -4,21 +4,31 @@ import { ProductService } from '../services/productService.js';
 const router=Router();
 const productService = new ProductService();
 
-router.get("/",async(req,res)=>{
+router.get("/getAll",async(req,res)=>{
     console.log(`This is a get operation`);
 
     const productos=await productService.getAllProducts();
     return res.status(200).json(productos);
 })
 
-router.get('/:id', async (req, res) => {
-    console.log(`Request URL Param: ${req.params.id}`);
+
+router.get('/:productName', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.productName}`);
     console.log(`This is a get operation`);
   
-    const product = await productService.getProductById(req.params.id);
+    const product = await productService.getProductByName(req.params.productName);
   
     return res.status(200).json(product);
 });
+
+router.get('',async(req,res)=>{
+    console.log(`Request URL Param: ${req.params.idProduct}`);
+    console.log(`This is a get operation`);
+  
+    const product = await productService.getDisorderByProductId(req.query.idProduct);
+  
+    return res.status(200).json(product);
+})
 
 router.post('', async (req, res) => {
     console.log(`This is a post operation`);

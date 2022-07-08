@@ -114,4 +114,14 @@ export class UserService{
 
         return response.recordset;
     }
+
+    ableUserLogIn=async(mail,password)=>{
+        console.log('This is a function on the service');
+        await pool.connect();
+        let result = await pool.query(`SELECT * 
+                                    FROM ${userTable}
+                                    WHERE mail=${mail} AND userPassword=${password}`);
+
+        return result.rowCount;
+    }
 }

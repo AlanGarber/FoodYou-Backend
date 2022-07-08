@@ -30,6 +30,15 @@ router.get('/disorders/:id', async (req, res) => {
     return res.status(200).json(disorders);
 });
 
+router.get('/logIn', async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a get operation`);
+  
+    const disorders = await userService.ableUserLogIn(req.params.mail,req.params.password);
+  
+    return res.status(200).json(disorders);
+});
+
 router.post('/:id', async (req, res) => {
     console.log(`This is a get operation`);
   

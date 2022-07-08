@@ -20,4 +20,13 @@ router.get('/:id', async (req, res) => {
     return res.status(200).json(disorder);
 });
 
+router.post('', async (req, res) => {
+    console.log(`Request URL Param: ${req.body}`);
+    console.log(`This is a post operation`);
+  
+    const disorder = await disorderService.createDisorder(req.body.disorderName);
+  
+    return res.status(200).json(disorder);
+});
+
 export default router
